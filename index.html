@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Natalia Leal</title>
+  <title>Portfolio de Natalia Leal</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
-  <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
 </head>
 <body>
+  <!-- Welcome Screen -->
   <div id="welcome">
     <div class="welcome-content">
       <h1>Soy Natalia Leal</h1>
@@ -19,14 +16,14 @@
     </div>
   </div>
 
-  <div id="portfolio" class="hidden">
-    <div id="pdf-container">
-      <canvas id="pdf-render"></canvas>
-      <div id="controls">
-        <button id="prev-btn">←</button>
-        <button id="next-btn">→</button>
-      </div>
+  <!-- PDF Viewer -->
+  <div id="pdf-viewer" style="display: none;">
+    <canvas id="pdf-canvas"></canvas>
+    <div id="controls">
+      <button id="prev-btn">Anterior</button>
+      <button id="next-btn">Siguiente</button>
     </div>
   </div>
-</body>
-</html>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="script.js"></script>
