@@ -1,69 +1,58 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const welcome = document.getElementById('welcome');
-  const pdfViewer = document.getElementById('pdf-viewer');
-  const enterBtn = document.getElementById('enter-btn');
-  
-  // Enter Button Click
-  enterBtn.addEventListener('click', () => {
-    welcome.style.opacity = '0'; // Fade out welcome screen
-    setTimeout(() => {
-      welcome.style.display = 'none'; // Remove welcome screen
-      pdfViewer.style.display = 'block'; // Show PDF viewer
-      loadPDF('./assets/portfolio.pdf'); // Load the PDF
-    }, 1000); // Matches the CSS transition duration
+const welcomeScreen = document.getElementById('welcome');
+const enterBtn = document.getElementById('enter-btn');
+const pdfViewer = document.getElementById('pdf-viewer');
+const pdfCanvas = document.getElementById('pdf-canvas');
+const nextBtn = document.getElementById('next-btn');
+const prevBtn = document.getElementById('prev-btn');
+
+let currentPage = 1;
+let pdfDoc = null;
+
+// Load the PDF file
+const url = 'assets/portfolio.pdf';  // Ensure the path is correct
+pdfjsLib.getDocument(url).promise.then(function (pdf) {
+  pdfDoc = pdf;
+  renderPage(currentPage);
+});
+
+// Show PDF viewer and hide welcome screen
+enterBtn.addEventListener('click', function () {
+  welcomeScreen.style.display = 'none';
+  pdfViewer.style.display = 'block';
+});
+
+// Render a specific page
+function renderPage(pageNum) {
+  pdfDoc.getPage(pageNum).then(function (page) {
+    const scale = 2.0;  // Increase scale for better resolution
+    const viewport = page.getViewport({ scale: scale });
+
+    pdfCanvas.height = viewport.height;
+    pdfCanvas.width = viewport.width;
+
+    const ctx = pdfCanvas.getContext('2d');
+    const renderContext = {
+      canvasContext: ctx,
+      viewport: viewport
+    };
+
+    // Render PDF page to canvas
+    page.render(renderContext);
   });
-  
-  // Load PDF when Enter button is clicked
-  function loadPDF(url) {
-    const canvas = document.getElementById('pdf-canvas');
-    const context = canvas.getContext('2d');
-  
-    pdfjsLib.getDocument(url).promise.then(pdf => {
-      renderPage(pdf, 1); // Render the first page initially
-  
-      // You can add event listeners for next/prev page buttons here
-      document.getElementById('next-btn').addEventListener('click', () => {
-        if (currentPage < pdf.numPages) {
-          renderPage(pdf, ++currentPage);
-        }
-      });
-  
-      document.getElementById('prev-btn').addEventListener('click', () => {
-        if (currentPage > 1) {
-          renderPage(pdf, --currentPage);
-        }
-      });
-  
-      // Current page tracker
-      let currentPage = 1;
-  
-      // Function to render a page
-      function renderPage(pdf, pageNum) {
-        pdf.getPage(pageNum).then(page => {
-          const scale = getResponsiveScale();
-          const viewport = page.getViewport({ scale });
-  
-          // Resize the canvas to fit the viewport
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
-  
-          const renderContext = {
-            canvasContext: context,
-            viewport: viewport
-          };
-          page.render(renderContext);
-        });
-      }
-  
-      // Function to calculate scale based on window size
-      function getResponsiveScale() {
-        const containerWidth = pdfViewer.clientWidth;
-        const containerHeight = pdfViewer.clientHeight;
-  
-        // Set the maximum scale based on container size
-        const scale = Math.min(containerWidth / 800, containerHeight / 1000); // Adjust these values as needed
-        return scale;
-      }
-    });
+}
+
+// Next button functionality
+nextBtn.addEventListener('click', function () {
+  if (currentPage < pdfDoc.numPages) {
+    currentPage++;
+    renderPage(currentPage);
+  }
+});
+
+// Previous button functionality
+prevBtn.addEventListener('click', function () {
+  if (currentPage > 1) {
+    currentPage--;
+    renderPage(currentPage);
   }
 });
