@@ -1,60 +1,40 @@
-// Path to the PDF file
-const pdfUrl = './assets/portfolio.pdf';
+document.addEventListener('DOMContentLoaded', () => {
+  const welcome = document.getElementById('welcome');
+  const pdfViewer = document.getElementById('pdf-viewer');
+  const enterBtn = document.getElementById('enter-btn');
 
-// Set up PDF.js worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+  // Enter Button Click
+  enterBtn.addEventListener('click', () => {
+    welcome.style.opacity = '0'; // Fade out welcome screen
+    setTimeout(() => {
+      welcome.style.display = 'none'; // Remove welcome screen
+      pdfViewer.style.display = 'block'; // Show PDF viewer
+    }, 1000); // Matches the CSS transition duration
+  });
 
-let pdfDoc = null; // Loaded PDF document
-let pageNum = 1; // Current page number
-let canvas = document.getElementById('pdf-canvas'); // The canvas where the PDF will be rendered
-let ctx = canvas.getContext('2d'); // Canvas context
-
-// Load the PDF
-const loadPDF = async (url) => {
-  try {
-    pdfDoc = await pdfjsLib.getDocument(url).promise; // Load the PDF document
-    renderPage(pageNum); // Render the first page
-  } catch (error) {
-    console.error('Error loading PDF:', error);
-    alert('Failed to load the PDF. Check the file path and ensure the file exists.');
-  }
-};
-
-// Render a specific page
-const renderPage = async (num) => {
-  try {
-    const page = await pdfDoc.getPage(num); // Get the page
-    const viewport = page.getViewport({ scale: 1.5 }); // Set scale for rendering
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
-
-    const renderContext = {
-      canvasContext: ctx,
-      viewport: viewport,
-    };
-
-    await page.render(renderContext).promise; // Render the page
-  } catch (error) {
-    console.error('Error rendering page:', error);
-    alert('Failed to render the page.');
-  }
-};
-
-// Handle navigation to the next page
-document.getElementById('next-btn').addEventListener('click', () => {
-  if (pageNum < pdfDoc.numPages) {
-    pageNum++;
-    renderPage(pageNum);
-  }
+  // Example of how to load a PDF (replace with actual PDF URL)
+  const pdfUrl = './assets/portfolio.pdf'; // Path to the PDF file
+  loadPDF(pdfUrl);
 });
 
-// Handle navigation to the previous page
-document.getElementById('prev-btn').addEventListener('click', () => {
-  if (pageNum > 1) {
-    pageNum--;
-    renderPage(pageNum);
-  }
-});
+// Function to load and render PDF
+function loadPDF(url) {
+  const canvas = document.getElementById('pdf-canvas');
+  const context = canvas.getContext('2d');
+  
+  pdfjsLib.getDocument(url).promise.then(pdf => {
+    pdf.getPage(1).then(page => {
+      const scale = 1.5;
+      const viewport = page.getViewport({ scale });
 
-// Load the PDF when the page is ready
-loadPDF(pdfUrl);
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      const renderContext = {
+        canvasContext: context,
+        viewport: viewport
+      };
+      page.render(renderContext);
+    });
+  });
+}
