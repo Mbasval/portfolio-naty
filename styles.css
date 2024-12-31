@@ -13,21 +13,22 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('./assets/background.jpg'); /* Replace with your image */
+  background-image: url('./assets/your-background.jpg'); /* Replace with your image */
   background-size: cover;
   background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  z-index: 10; /* Ensures this section is on top */
   transition: opacity 1s ease-in-out;
-  color: white; /* Makes text visible */
 }
 
 .welcome-content h1,
 .welcome-content p {
   margin: 0;
   padding: 10px;
+  color: white;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Adds contrast */
 }
 
@@ -47,19 +48,39 @@ body {
   background-color: #005f99;
 }
 
-/* Portfolio PDF viewer */
-#portfolio {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #111;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* PDF Viewer */
+#pdf-viewer {
+  position: relative;
+  z-index: 1; /* Below the welcome screen */
+  background-color: black; /* Prevent transparency issues */
+  padding: 20px;
+  text-align: center;
 }
+
+#pdf-canvas {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+#controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007acc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005f99;
+}
+
 
 #pdf-container {
   position: relative;
@@ -72,29 +93,5 @@ canvas {
   width: 100%;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
-
-#controls {
-  margin-top: 20px;
-}
-
-#controls button {
-  background-color: #007acc;
-  border: none;
-  padding: 10px 20px;
-  color: white;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#controls button:hover {
-  background-color: #005f99;
-}
-
-/* Ocultar elementos */
-.hidden {
-  display: none;
-}
-
 
 
