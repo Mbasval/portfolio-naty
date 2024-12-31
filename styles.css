@@ -1,65 +1,57 @@
-/* General reset for body */
-body {
+/* Global Styles */
+body, html {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+  height: 100%;
 }
 
 /* Welcome Screen */
 #welcome {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('./assets/background.jpg'); /* Replace with your image */
-  background-size: cover;
-  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  background: #fff url('./assets/background.jpg') center center/cover no-repeat;
   text-align: center;
-  z-index: 10; /* Ensures the welcome screen is on top */
-  transition: opacity 1s ease-in-out;
+  opacity: 1;
+  transition: opacity 1s ease;
 }
 
-.welcome-content h1,
-.welcome-content p {
-  margin: 0;
-  padding: 10px;
-  color: white;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Adds contrast */
+#welcome h1 {
+  font-size: 3em;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
 }
 
 #enter-btn {
+  margin-top: 20px;
   padding: 15px 30px;
-  font-size: 1.2rem;
   background-color: #007acc;
+  color: white;
   border: none;
   border-radius: 5px;
-  color: white;
   cursor: pointer;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-  margin-top: 20px;
-  z-index: 20; /* Ensures the button is above any potential overlapping elements */
+  font-size: 1.2em;
 }
 
 #enter-btn:hover {
   background-color: #005f99;
 }
 
-/* General styles for PDF viewer */
+/* PDF Viewer */
 #pdf-viewer {
   position: relative;
+  display: none;
   z-index: 1;
   background-color: black;
   padding: 20px;
   text-align: center;
-  display: none;
-  overflow: hidden; /* Prevents overflow if canvas is too large */
   max-width: 100%;
-  max-height: 100vh; /* Prevents canvas from overflowing the screen */
-  margin: 0 auto;
+  max-height: 100vh;
+  overflow: hidden;
 }
 
 #pdf-canvas {
@@ -69,26 +61,49 @@ body {
   margin-bottom: 10px;
 }
 
-#controls {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #007acc;
-  color: white;
-  border: none;
-  border-radius: 5px;
+/* Navigation Buttons (Next/Previous) */
+#next-btn, #prev-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 20px;
   cursor: pointer;
+  z-index: 10;
 }
 
-button:hover {
-  background-color: #005f99;
+#next-btn {
+  right: 10px;
 }
 
+#prev-btn {
+  left: 10px;
+}
 
-button:hover {
-  background-color: #005f99;
+#next-btn i, #prev-btn i {
+  color: white;
+  font-size: 24px;
+}
+
+/* Show buttons when near the edges */
+#pdf-viewer:hover #next-btn,
+#pdf-viewer:hover #prev-btn {
+  opacity: 1;
+}
+
+#pdf-viewer:hover #next-btn:hover,
+#pdf-viewer:hover #prev-btn:hover {
+  opacity: 1;
+}
+
+/* Controls visibility when near edges */
+#pdf-viewer:hover #next-btn {
+  transform: translateY(-50%) scale(1.1);
+}
+
+#pdf-viewer:hover #prev-btn {
+  transform: translateY(-50%) scale(1.1);
 }
