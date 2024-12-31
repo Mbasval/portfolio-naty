@@ -1,9 +1,8 @@
-/* General styles */
+/* General reset for body */
 body {
   margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
-  color: white;
-  overflow: hidden;
 }
 
 /* Welcome Screen */
@@ -20,7 +19,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  z-index: 10; /* Ensures this section is on top */
+  z-index: 10; /* Ensures the welcome screen is on top */
   transition: opacity 1s ease-in-out;
 }
 
@@ -42,6 +41,7 @@ body {
   cursor: pointer;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   margin-top: 20px;
+  z-index: 20; /* Ensures the button is above any potential overlapping elements */
 }
 
 #enter-btn:hover {
@@ -52,9 +52,10 @@ body {
 #pdf-viewer {
   position: relative;
   z-index: 1; /* Below the welcome screen */
-  background-color: black; /* Prevent transparency issues */
+  background-color: black;
   padding: 20px;
   text-align: center;
+  display: none; /* Initially hidden */
 }
 
 #pdf-canvas {
@@ -80,18 +81,3 @@ button {
 button:hover {
   background-color: #005f99;
 }
-
-
-#pdf-container {
-  position: relative;
-  width: 80%;
-  max-width: 800px;
-  text-align: center;
-}
-
-canvas {
-  width: 100%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
-}
-
-
