@@ -1,31 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio de Natalia Leal</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Mi Portfolio de Diseño</title>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- External Stylesheet (Optional) -->
+  <style>
+    /* Global Styles */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      height: 100%;
+    }
+
+    /* Welcome Screen */
+    #welcome {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #fff url('your-image.jpg') center center/cover no-repeat;
+      text-align: center;
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+
+    #welcome h1 {
+      font-size: 3em;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    #enter-btn {
+      margin-top: 20px;
+      padding: 15px 30px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+
+    #enter-btn:hover {
+      background-color: #005f99;
+    }
+
+    /* PDF Viewer */
+    #pdf-viewer {
+      position: relative;
+      display: none;
+      z-index: 1;
+      background-color: black;
+      padding: 20px;
+      text-align: center;
+      max-width: 100%;
+      max-height: 100vh;
+      overflow: hidden;
+    }
+
+    #pdf-canvas {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+
+    /* Navigation Buttons (Next/Previous) */
+    #next-btn, #prev-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      padding: 20px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    #next-btn {
+      right: 10px;
+    }
+
+    #prev-btn {
+      left: 10px;
+    }
+
+    #next-btn i, #prev-btn i {
+      color: white;
+      font-size: 24px;
+    }
+
+    /* Show buttons when near the edges */
+    #pdf-viewer:hover #next-btn,
+    #pdf-viewer:hover #prev-btn {
+      opacity: 1;
+    }
+
+    #pdf-viewer:hover #next-btn:hover,
+    #pdf-viewer:hover #prev-btn:hover {
+      opacity: 1;
+    }
+
+    /* Controls visibility when near edges */
+    #pdf-viewer:hover #next-btn {
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    #pdf-viewer:hover #prev-btn {
+      transform: translateY(-50%) scale(1.1);
+    }
+  </style>
 </head>
 <body>
+
   <!-- Welcome Screen -->
   <div id="welcome">
-    <div class="welcome-content">
-      <h1>Soy Natalia Leal</h1>
-      <p>Bienvenid@ a Mi Portfolio de Diseño</p>
+    <div>
+      <h1>Soy Natalia Leal, Bienvenid@ a Mi Portfolio de Diseño</h1>
       <button id="enter-btn">Entrar</button>
     </div>
   </div>
 
   <!-- PDF Viewer -->
-  <div id="pdf-viewer" style="display: none;">
+  <div id="pdf-viewer">
     <canvas id="pdf-canvas"></canvas>
-    <div id="controls">
-      <button id="prev-btn">Anterior</button>
-      <button id="next-btn">Siguiente</button>
+    <!-- Navigation buttons -->
+    <div id="prev-btn">
+      <i class="fas fa-arrow-left"></i>
+    </div>
+    <div id="next-btn">
+      <i class="fas fa-arrow-right"></i>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
