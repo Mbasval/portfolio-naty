@@ -13,7 +13,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('./assets/your-background.jpg'); /* Replace with your image */
+  background-image: url('./assets/background.jpg'); /* Replace with your image */
   background-size: cover;
   background-position: center;
   display: flex;
