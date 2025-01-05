@@ -44,15 +44,13 @@ body, html {
 
 /* PDF Viewer */
 #pdf-viewer {
-  position: relative;
-  display: none;
-  z-index: 1;
-  background-color: black;
-  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  padding: 20px 0;
+  height: 100%;
+  background-color: black;
+  display: none;
 }
 
 #pdf-canvas {
@@ -65,13 +63,19 @@ body, html {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
   background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
   border-radius: 50%;
-  padding: 20px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
   cursor: pointer;
-  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 #next-btn {
@@ -82,18 +86,8 @@ body, html {
   left: 10px;
 }
 
-#next-btn i, #prev-btn i {
-  color: white;
-  font-size: 24px;
-}
-
-/* Show buttons when near the edges */
+/* Show buttons when near edges */
 #pdf-viewer:hover #next-btn,
 #pdf-viewer:hover #prev-btn {
   opacity: 1;
-}
-
-#pdf-viewer:hover #next-btn:hover,
-#pdf-viewer:hover #prev-btn:hover {
-  transform: translateY(-50%) scale(1.1);
 }
