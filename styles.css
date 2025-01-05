@@ -26,7 +26,7 @@ body, html {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: black;
+  color: white;
 }
 
 #enter-btn {
@@ -34,7 +34,7 @@ body, html {
   padding: 15px 30px;
   font-size: 1rem;
   color: white;
-  background-color: rgba(60, 60, 60, 0.2);
+  background-color: rgba(250, 250, 250, 0.2);
   border: 1px solid white;
   border-radius: 30px;
   cursor: pointer;
@@ -42,8 +42,8 @@ body, html {
 }
 
 #enter-btn:hover {
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
 }
 
 /* PDF Viewer */
