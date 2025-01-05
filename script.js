@@ -9,7 +9,7 @@ let currentPage = 1;
 let pdfDoc = null;
 
 // Load the PDF file
-const url = 'assets/portfolio.pdf';  // Ensure the path is correct
+const url = 'assets/portfolio.pdf'; // Ensure the path is correct
 pdfjsLib.getDocument(url).promise.then(function (pdf) {
   pdfDoc = pdf;
   renderPage(currentPage);
@@ -21,22 +21,28 @@ enterBtn.addEventListener('click', function () {
   pdfViewer.style.display = 'block';
 });
 
-// Render a specific page
+// Render a specific page with height-fit scaling
 function renderPage(pageNum) {
   pdfDoc.getPage(pageNum).then(function (page) {
-    const scale = 2.0;  // Increase scale for better resolution
-    const viewport = page.getViewport({ scale: scale });
+    const viewport = page.getViewport({ scale: 1 });
 
-    pdfCanvas.height = viewport.height;
-    pdfCanvas.width = viewport.width;
+    // Calculate scale to fit window height
+    const windowHeight = window.innerHeight;
+    const scale = (windowHeight - 40) / viewport.height; // 40px for padding/margins
+
+    const scaledViewport = page.getViewport({ scale: scale });
+    pdfCanvas.width = scaledViewport.width * window.devicePixelRatio;
+    pdfCanvas.height = scaledViewport.height * window.devicePixelRatio;
 
     const ctx = pdfCanvas.getContext('2d');
+    ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+
     const renderContext = {
       canvasContext: ctx,
-      viewport: viewport
+      viewport: scaledViewport,
     };
 
-    // Render PDF page to canvas
+    // Render the page on the canvas
     page.render(renderContext);
   });
 }
@@ -55,4 +61,9 @@ prevBtn.addEventListener('click', function () {
     currentPage--;
     renderPage(currentPage);
   }
+});
+
+// Update PDF rendering when the window resizes
+window.addEventListener('resize', function () {
+  renderPage(currentPage);
 });
