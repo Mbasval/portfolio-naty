@@ -19,36 +19,42 @@ pdfjsLib.getDocument(url).promise.then(function (pdf) {
 enterBtn.addEventListener('click', function () {
   welcomeScreen.style.display = 'none';
   pdfViewer.style.display = 'block';
+  renderPage(currentPage);
 });
 
-// Render a specific page, scaling to fit the window
+// Render a specific page, scaled to always fit inside the window
 function renderPage(pageNum) {
   pdfDoc.getPage(pageNum).then(function (page) {
     const viewport = page.getViewport({ scale: 1 });
 
-    // Calculate the scale to fit both height and width
-    const windowHeight = window.innerHeight;
+    // Calculate scale to ensure the entire page fits within the window
     const windowWidth = window.innerWidth;
-    const scale = Math.min(windowWidth / viewport.width, windowHeight / viewport.height);
+    const windowHeight = window.innerHeight;
+
+    const scaleX = windowWidth / viewport.width;
+    const scaleY = windowHeight / viewport.height;
+
+    // Use the smaller scale factor to ensure no dimension overflows
+    const scale = Math.min(scaleX, scaleY);
 
     const scaledViewport = page.getViewport({ scale: scale });
-    pdfCanvas.width = scaledViewport.width * window.devicePixelRatio;
-    pdfCanvas.height = scaledViewport.height * window.devicePixelRatio;
+
+    pdfCanvas.width = scaledViewport.width;
+    pdfCanvas.height = scaledViewport.height;
 
     const ctx = pdfCanvas.getContext('2d');
-    ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+    ctx.clearRect(0, 0, pdfCanvas.width, pdfCanvas.height);
 
     const renderContext = {
       canvasContext: ctx,
       viewport: scaledViewport,
     };
 
-    // Render the page on the canvas
     page.render(renderContext);
   });
 }
 
-// Next button functionality
+// Handle "Next" button click
 nextBtn.addEventListener('click', function () {
   if (currentPage < pdfDoc.numPages) {
     currentPage++;
@@ -56,7 +62,7 @@ nextBtn.addEventListener('click', function () {
   }
 });
 
-// Previous button functionality
+// Handle "Previous" button click
 prevBtn.addEventListener('click', function () {
   if (currentPage > 1) {
     currentPage--;
@@ -64,7 +70,7 @@ prevBtn.addEventListener('click', function () {
   }
 });
 
-// Update PDF rendering when the window resizes
+// Re-render the current page when the window is resized
 window.addEventListener('resize', function () {
   renderPage(currentPage);
 });
