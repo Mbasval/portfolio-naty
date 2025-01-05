@@ -1,93 +1,34 @@
-/* Global Styles */
 body, html {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
   height: 100%;
   overflow: hidden; /* Disable scrolling */
 }
 
-/* Welcome Screen */
 #welcome {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: #fff url('assets/background.jpg') center center/cover no-repeat;
-  text-align: center;
-  opacity: 1;
-  transition: opacity 1s ease;
-}
-
-#welcome h1 {
-  font-size: 3em;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 10px;
-}
-
-#enter-btn {
-  margin-top: 20px;
-  padding: 15px 30px;
-  background-color: #007acc;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.2em;
-}
-
-#enter-btn:hover {
-  background-color: #005f99;
-}
-
-/* PDF Viewer */
-#pdf-viewer {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+#pdf-viewer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: black;
-  display: none;
+  width: 100%;
+  height: 100%;
 }
 
 #pdf-canvas {
   display: block;
-  margin: 0 auto;
 }
 
-/* Navigation Buttons */
-#next-btn, #prev-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5em;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-#next-btn {
-  right: 10px;
-}
-
-#prev-btn {
-  left: 10px;
-}
-
-/* Show buttons when near edges */
-#pdf-viewer:hover #next-btn,
-#pdf-viewer:hover #prev-btn {
-  opacity: 1;
+#orientation-warning {
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
