@@ -21,14 +21,15 @@ enterBtn.addEventListener('click', function () {
   pdfViewer.style.display = 'block';
 });
 
-// Render a specific page with height-fit scaling
+// Render a specific page with proportional scaling
 function renderPage(pageNum) {
   pdfDoc.getPage(pageNum).then(function (page) {
     const viewport = page.getViewport({ scale: 1 });
 
-    // Calculate scale to fit window height
+    // Calculate scale to fit the window dimensions
     const windowHeight = window.innerHeight;
-    const scale = windowHeight / viewport.height;
+    const windowWidth = window.innerWidth;
+    const scale = Math.min(windowWidth / viewport.width, windowHeight / viewport.height);
 
     const scaledViewport = page.getViewport({ scale: scale });
     pdfCanvas.width = scaledViewport.width * window.devicePixelRatio;
