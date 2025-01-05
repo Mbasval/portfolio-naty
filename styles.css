@@ -4,6 +4,7 @@ body, html {
   padding: 0;
   font-family: Arial, sans-serif;
   height: 100%;
+  overflow: hidden; /* Disable scrolling */
 }
 
 /* Welcome Screen */
@@ -12,7 +13,7 @@ body, html {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #fff url('/assets/background.jpg') center center/cover no-repeat;
+  background: #fff url('your-image.jpg') center center/cover no-repeat;
   text-align: center;
   opacity: 1;
   transition: opacity 1s ease;
@@ -47,21 +48,19 @@ body, html {
   display: none;
   z-index: 1;
   background-color: black;
-  padding: 20px;
   text-align: center;
-  max-width: 100%;
-  max-height: 100vh;
+  width: 100%;
+  height: 100vh;
   overflow: hidden;
+  padding: 20px 0;
 }
 
 #pdf-canvas {
-  width: 100%;
-  height: auto;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
+  display: block;
+  margin: 0 auto;
 }
 
-/* Navigation Buttons (Next/Previous) */
+/* Navigation Buttons */
 #next-btn, #prev-btn {
   position: absolute;
   top: 50%;
@@ -96,14 +95,5 @@ body, html {
 
 #pdf-viewer:hover #next-btn:hover,
 #pdf-viewer:hover #prev-btn:hover {
-  opacity: 1;
-}
-
-/* Controls visibility when near edges */
-#pdf-viewer:hover #next-btn {
-  transform: translateY(-50%) scale(1.1);
-}
-
-#pdf-viewer:hover #prev-btn {
   transform: translateY(-50%) scale(1.1);
 }
