@@ -1,93 +1,102 @@
-/* Global Styles */
+/* General reset */
 body, html {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
   height: 100%;
-  overflow: hidden; /* Disable scrolling */
+  font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* Welcome Screen */
+/* Welcome screen */
 #welcome {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: #fff url('/assets/background.jpg') center center/cover no-repeat;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/your-image.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
   text-align: center;
-  opacity: 1;
-  transition: opacity 1s ease;
+  color: white;
+  padding: 20px;
 }
 
 #welcome h1 {
-  font-size: 3em;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 10px;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+#welcome h2 {
+  font-size: 1.2rem;
+  margin-top: 0;
 }
 
 #enter-btn {
-  margin-top: 20px;
+  margin-top: 40px;
   padding: 15px 30px;
-  background-color: #007acc;
+  font-size: 1rem;
   color: white;
-  border: none;
-  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid white;
+  border-radius: 30px;
   cursor: pointer;
-  font-size: 1.2em;
+  transition: all 0.3s ease;
 }
 
 #enter-btn:hover {
-  background-color: #005f99;
+  background-color: white;
+  color: black;
 }
 
 /* PDF Viewer */
 #pdf-viewer {
-  position: fixed;
-  top: 0;
-  left: 0;
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   background-color: black;
-  display: none;
+  position: relative;
+  text-align: center;
 }
 
 #pdf-canvas {
   display: block;
-  margin: 0 auto;
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid #fff;
 }
 
-/* Navigation Buttons */
-#next-btn, #prev-btn {
+/* Navigation buttons */
+.navigation {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5em;
+  justify-content: space-between;
+  padding: 0 20px;
+  transform: translateY(-50%);
+}
+
+#prev-btn, #next-btn {
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  padding: 10px;
+  border-radius: 50%;
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-#next-btn {
-  right: 10px;
+#prev-btn:hover, #next-btn:hover {
+  background: rgba(255, 255, 255, 0.5);
+  color: black;
 }
 
-#prev-btn {
-  left: 10px;
-}
-
-/* Show buttons when near edges */
-#pdf-viewer:hover #next-btn,
-#pdf-viewer:hover #prev-btn {
+#pdf-viewer:hover .navigation button {
   opacity: 1;
 }
