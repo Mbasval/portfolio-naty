@@ -1,119 +1,82 @@
-/* General reset */
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: Arial, sans-serif;
+const welcomeScreen = document.getElementById('welcome');
+const enterBtn = document.getElementById('enter-btn');
+const pdfViewer = document.getElementById('pdf-viewer');
+const pdfCanvas = document.getElementById('pdf-canvas');
+const nextBtn = document.getElementById('next-btn');
+const prevBtn = document.getElementById('prev-btn');
+
+let currentPage = 1;
+let pdfDoc = null;
+
+// Load the PDF file
+const url = 'assets/portfolio.pdf'; // Ensure the path is correct
+pdfjsLib.getDocument(url).promise.then(function (pdf) {
+  pdfDoc = pdf;
+  renderPage(currentPage);
+});
+
+// Show PDF viewer and hide welcome screen
+enterBtn.addEventListener('click', function () {
+  welcomeScreen.style.display = 'none';
+  pdfViewer.style.display = 'block';
+  renderPage(currentPage);
+});
+
+// Render a specific page, scaled to always fit inside the window
+function renderPage(pageNum) {
+  pdfDoc.getPage(pageNum).then(function (page) {
+    const viewport = page.getViewport({ scale: 1 });
+
+    // Calculate scale to ensure the entire page fits within the window
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    const scaleX = windowWidth / viewport.width;
+    const scaleY = windowHeight / viewport.height;
+
+    // Use the smaller scale factor to ensure no dimension overflows
+    const scale = Math.min(scaleX, scaleY);
+
+    const scaledViewport = page.getViewport({ scale: scale });
+
+    // Adjust for high-resolution screens (e.g., Retina)
+    const devicePixelRatio = window.devicePixelRatio || 1;
+    pdfCanvas.width = scaledViewport.width * devicePixelRatio;
+    pdfCanvas.height = scaledViewport.height * devicePixelRatio;
+
+    pdfCanvas.style.width = `${scaledViewport.width}px`;
+    pdfCanvas.style.height = `${scaledViewport.height}px`;
+
+    const ctx = pdfCanvas.getContext('2d');
+    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); // Scale for high-res displays
+    ctx.clearRect(0, 0, pdfCanvas.width, pdfCanvas.height);
+
+    const renderContext = {
+      canvasContext: ctx,
+      viewport: scaledViewport,
+    };
+
+    page.render(renderContext);
+  });
 }
 
-/* Welcome screen */
-#welcome {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-image: url('assets/your-image.jpg'); /* Replace with your image path */
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  flex-direction: column;
-}
+// Handle "Next" button click
+nextBtn.addEventListener('click', function () {
+  if (currentPage < pdfDoc.numPages) {
+    currentPage++;
+    renderPage(currentPage);
+  }
+});
 
-#welcome h1 {
-  color: white;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-  font-size: 2.5rem;
-  text-align: center;
-}
+// Handle "Previous" button click
+prevBtn.addEventListener('click', function () {
+  if (currentPage > 1) {
+    currentPage--;
+    renderPage(currentPage);
+  }
+});
 
-#enter-btn {
-  margin-top: 20px;
-  padding: 15px 30px;
-  font-size: 1rem;
-  color: white;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid white;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-#enter-btn:hover {
-  background-color: white;
-  color: black;
-}
-
-/* PDF Viewer */
-#pdf-viewer {
-  display: none; /* Hidden by default */
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  position: relative;
-}
-
-#pdf-canvas {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-/* Navigation buttons */
-#next-btn, #prev-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-#next-btn:hover, #prev-btn:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-  color: black;
-}
-
-#next-btn {
-  right: 10px;
-}
-
-#prev-btn {
-  left: 10px;
-}
-
-/* Show navigation buttons on hover near the edges */
-#pdf-viewer:hover #next-btn,
-#pdf-viewer:hover #prev-btn {
-  opacity: 1;
-}
-
-/* Orientation warning */
-#orientation-warning {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  color: white;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  z-index: 9999;
-}
+// Re-render the current page when the window is resized
+window.addEventListener('resize', function () {
+  renderPage(currentPage);
+});
