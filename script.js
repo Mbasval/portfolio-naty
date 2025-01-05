@@ -8,7 +8,7 @@ const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 
 // PDF.js setup
-pdfjsLib.getDocument('assets/your-pdf.pdf').promise.then(function (pdf) {
+pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
   pdfDoc = pdf;
   renderPage(currentPage);
 });
