@@ -21,12 +21,12 @@ enterBtn.addEventListener('click', function () {
   pdfViewer.style.display = 'block';
 });
 
-// Render a specific page with proportional scaling
+// Render a specific page, scaling to fit the window
 function renderPage(pageNum) {
   pdfDoc.getPage(pageNum).then(function (page) {
     const viewport = page.getViewport({ scale: 1 });
 
-    // Calculate scale to fit the window dimensions
+    // Calculate the scale to fit both height and width
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
     const scale = Math.min(windowWidth / viewport.width, windowHeight / viewport.height);
