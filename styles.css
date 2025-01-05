@@ -14,7 +14,7 @@ body, html {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-image: url('assets/background.jpg'); /* Replace with your image path */
+  background-image: url('assets/your-image.jpg'); /* Replace with your image path */
   background-size: cover;
   background-position: center;
   text-align: center;
@@ -26,11 +26,6 @@ body, html {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-}
-
-#welcome h2 {
-  font-size: 1.2rem;
-  margin-top: 0;
 }
 
 #enter-btn {
