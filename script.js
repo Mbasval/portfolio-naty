@@ -1,61 +1,82 @@
-document.getElementById('enter-btn').addEventListener('click', () => {
-  document.getElementById('welcome').style.display = 'none';
-  document.getElementById('pdf-viewer').style.display = 'flex';
-  loadPDF(); // Load PDF when the user enters
-});
+const welcomeScreen = document.getElementById('welcome');
+const enterBtn = document.getElementById('enter-btn');
+const pdfViewer = document.getElementById('pdf-viewer');
+const pdfCanvas = document.getElementById('pdf-canvas');
+const nextBtn = document.getElementById('next-btn');
+const prevBtn = document.getElementById('prev-btn');
 
 let currentPage = 1;
 let pdfDoc = null;
 
-const scale = 1.5; // Adjust this value if needed
+// Load the PDF file
+const url = 'assets/portfolio.pdf'; // Ensure the path is correct
+pdfjsLib.getDocument(url).promise.then(function (pdf) {
+  pdfDoc = pdf;
+  renderPage(currentPage);
+});
 
-// Initialize PDF.js and load the document
-function loadPDF() {
-  const url = 'assets/your-pdf.pdf'; // Replace with your PDF path
-  pdfjsLib.getDocument(url).promise.then((pdf) => {
-    pdfDoc = pdf;
-    renderPage(currentPage);
+// Show PDF viewer and hide welcome screen
+enterBtn.addEventListener('click', function () {
+  welcomeScreen.style.display = 'none';
+  pdfViewer.style.display = 'block';
+  renderPage(currentPage);
+});
+
+// Render a specific page, scaled to always fit inside the window
+function renderPage(pageNum) {
+  pdfDoc.getPage(pageNum).then(function (page) {
+    const viewport = page.getViewport({ scale: 1 });
+
+    // Calculate scale to ensure the entire page fits within the window
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    const scaleX = windowWidth / viewport.width;
+    const scaleY = windowHeight / viewport.height;
+
+    // Use the smaller scale factor to ensure no dimension overflows
+    const scale = Math.min(scaleX, scaleY);
+
+    const scaledViewport = page.getViewport({ scale: scale });
+
+    // Adjust for high-resolution screens (e.g., Retina)
+    const devicePixelRatio = window.devicePixelRatio || 1;
+    pdfCanvas.width = scaledViewport.width * devicePixelRatio;
+    pdfCanvas.height = scaledViewport.height * devicePixelRatio;
+
+    pdfCanvas.style.width = `${scaledViewport.width}px`;
+    pdfCanvas.style.height = `${scaledViewport.height}px`;
+
+    const ctx = pdfCanvas.getContext('2d');
+    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); // Scale for high-res displays
+    ctx.clearRect(0, 0, pdfCanvas.width, pdfCanvas.height);
+
+    const renderContext = {
+      canvasContext: ctx,
+      viewport: scaledViewport,
+    };
+
+    page.render(renderContext);
   });
 }
 
-// Render a specific page of the PDF
-function renderPage(num) {
-  pdfDoc.getPage(num).then((page) => {
-    const canvas = document.getElementById('pdf-canvas');
-    const context = canvas.getContext('2d');
-    const viewport = page.getViewport({ scale });
-
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
-
-    page.render({
-      canvasContext: context,
-      viewport: viewport,
-    });
-  });
-}
-
-// Next button functionality
-document.getElementById('next-btn').addEventListener('click', () => {
+// Handle "Next" button click
+nextBtn.addEventListener('click', function () {
   if (currentPage < pdfDoc.numPages) {
     currentPage++;
     renderPage(currentPage);
   }
 });
 
-// Previous button functionality
-document.getElementById('prev-btn').addEventListener('click', () => {
+// Handle "Previous" button click
+prevBtn.addEventListener('click', function () {
   if (currentPage > 1) {
     currentPage--;
     renderPage(currentPage);
   }
 });
 
-// Orientation warning for mobile devices
-window.addEventListener('resize', () => {
-  if (window.innerHeight > window.innerWidth) {
-    document.getElementById('orientation-warning').style.display = 'flex';
-  } else {
-    document.getElementById('orientation-warning').style.display = 'none';
-  }
+// Re-render the current page when the window is resized
+window.addEventListener('resize', function () {
+  renderPage(currentPage);
 });
