@@ -67,6 +67,7 @@ body, html {
   max-width: 100%;
   max-height: 100%;
   border: 1px solid #fff;
+  box-sizing: border-box;
 }
 
 /* Navigation buttons */
@@ -81,20 +82,22 @@ body, html {
 }
 
 #prev-btn, #next-btn {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.4); /* Slightly transparent white */
   border: none;
   color: white;
-  font-size: 1.5rem;
-  padding: 10px;
+  font-size: 2rem;
+  padding: 15px;
   border-radius: 50%;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scale(0.8);
 }
 
 #prev-btn:hover, #next-btn:hover {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.7); /* On hover, it becomes more opaque */
   color: black;
+  transform: scale(1);
 }
 
 #pdf-viewer:hover .navigation button {
