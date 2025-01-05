@@ -28,7 +28,7 @@ function renderPage(pageNum) {
 
     // Calculate scale to fit window height
     const windowHeight = window.innerHeight;
-    const scale = (windowHeight - 40) / viewport.height; // 40px for padding/margins
+    const scale = windowHeight / viewport.height;
 
     const scaledViewport = page.getViewport({ scale: scale });
     pdfCanvas.width = scaledViewport.width * window.devicePixelRatio;
