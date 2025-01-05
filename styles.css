@@ -3,7 +3,6 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* Prevent scrolling */
   font-family: Arial, sans-serif;
 }
 
@@ -14,10 +13,11 @@ body, html {
   align-items: center;
   width: 100%;
   height: 100%;
-  background-image: url('assets/background.jpg'); /* Replace with your image path */
+  background-image: url('assets/your-image.jpg'); /* Replace with your image path */
   background-size: cover;
   background-position: center;
   position: relative;
+  flex-direction: column;
 }
 
 #welcome h1 {
@@ -51,11 +51,10 @@ body, html {
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: black; /* Background for the PDF viewer */
+  background-color: black;
   position: relative;
 }
 
-/* PDF Canvas */
 #pdf-canvas {
   display: block;
   max-width: 100%;
@@ -79,4 +78,42 @@ body, html {
   align-items: center;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0
+  transition: opacity 0.3s ease;
+}
+
+#next-btn:hover, #prev-btn:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
+}
+
+#next-btn {
+  right: 10px;
+}
+
+#prev-btn {
+  left: 10px;
+}
+
+/* Show navigation buttons on hover near the edges */
+#pdf-viewer:hover #next-btn,
+#pdf-viewer:hover #prev-btn {
+  opacity: 1;
+}
+
+/* Orientation warning */
+#orientation-warning {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 9999;
+}
