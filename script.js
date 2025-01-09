@@ -10,7 +10,6 @@ const nextBtn = document.getElementById('next-btn');
 // PDF.js setup
 pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function(pdf) {
   pdfDoc = pdf;
-  console.log("PDF loaded successfully.");
   renderPage(currentPage);
 }).catch(function(error) {
   console.error("Error loading PDF:", error);
@@ -21,13 +20,8 @@ pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function(pdf) {
 function renderPage(num) {
   pdfDoc.getPage(num).then(function(page) {
     const viewport = page.getViewport({ scale: scale });
-    
-    // Resize the canvas based on the viewport size
-    const canvasWidth = canvas.clientWidth; // Use client width for responsive scaling
-    const canvasHeight = canvasWidth * (viewport.height / viewport.width);
-    
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
 
     const renderContext = {
       canvasContext: ctx,
