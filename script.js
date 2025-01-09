@@ -4,12 +4,6 @@ let pdfDoc = null;
 const scale = 1.5; // PDF zoom scale
 const canvas = document.getElementById('pdf-canvas');
 const ctx = canvas.getContext('2d');
-const prevBtn = document.getElementById('prev-btn');
-const nextBtn = document.getElementById('next-btn');
-
-// Swipe variables
-let touchStartX = 0;
-let touchEndX = 0;
 
 // PDF.js setup
 pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
@@ -32,46 +26,12 @@ function renderPage(num) {
       viewport: viewport
     };
     page.render(renderContext);
-    
-    // Update button visibility
-    updateNavButtonsVisibility();
   });
 }
 
-// Update navigation buttons visibility based on page number
-function updateNavButtonsVisibility() {
-  if (currentPage <= 1) {
-    prevBtn.style.opacity = 0.5;
-    prevBtn.disabled = true;
-  } else {
-    prevBtn.style.opacity = 1;
-    prevBtn.disabled = false;
-  }
-
-  if (currentPage >= pdfDoc.numPages) {
-    nextBtn.style.opacity = 0.5;
-    nextBtn.disabled = true;
-  } else {
-    nextBtn.style.opacity = 1;
-    nextBtn.disabled = false;
-  }
-}
-
-// Navigation buttons functionality
-prevBtn.addEventListener('click', function () {
-  if (currentPage <= 1) return;
-  currentPage--;
-  renderPage(currentPage);
-});
-
-nextBtn.addEventListener('click', function () {
-  if (currentPage >= pdfDoc.numPages) return;
-  currentPage++;
-  renderPage(currentPage);
-});
-
 // Enter button functionality (transition to PDF viewer)
 document.getElementById('enter-btn').addEventListener('click', function () {
+  // Hide the welcome screen and show the PDF viewer
   document.getElementById('welcome').style.display = 'none';
   document.getElementById('pdf-viewer').style.display = 'flex';
 });
@@ -83,7 +43,10 @@ window.addEventListener('resize', function() {
   }
 });
 
-// Swipe detection functions
+// Swipe detection functions (optional)
+let touchStartX = 0;
+let touchEndX = 0;
+
 function handleTouchStart(event) {
   touchStartX = event.touches[0].clientX;
 }
