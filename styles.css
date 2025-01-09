@@ -20,53 +20,64 @@ body, html {
   background-position: center;
   text-align: center;
   color: white;
-  position: relative; /* Ensure elements are positioned correctly */
+  position: relative;
+  z-index: 0; /* Ensure elements are placed correctly */
 }
 
 /* Transparent box behind the text */
 #welcome .text-box {
-  background-color: rgba(0, 0, 0, 0.6); /* Transparent black */
-  padding: 20px;
-  border-radius: 20px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for aesthetics */
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)); /* Soft gradient for depth */
+  padding: 30px;
+  border-radius: 25px; /* More rounded corners for elegance */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+  max-width: 80%;
   margin: 20px;
-  display: inline-block;
-  max-width: 90%;
   text-align: center;
   z-index: 1;
+  transition: transform 0.3s ease-in-out; /* Smooth hover transition */
 }
 
-/* Headings inside the text box */
+#welcome .text-box:hover {
+  transform: translateY(-10px); /* Slight lift on hover */
+}
+
+/* Headings */
 #welcome h1 {
-  font-size: 4rem;
-  font-weight: 500;
-  margin-bottom: 0.1rem;
+  font-size: 3.5rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
   color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Soft shadow for readability */
 }
 
 #welcome h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 400;
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.2rem;
   color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Subtle shadow for depth */
 }
 
 /* Enter Button */
 #enter-btn {
   margin-top: 40px;
   padding: 15px 30px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: white;
-  background-color: rgba(250, 250, 250, 0.2);
+  background-color: rgba(250, 250, 250, 0.3);
   border: 1px solid white;
-  border-radius: 30px;
+  border-radius: 50px; /* Fully rounded button */
   cursor: pointer;
   transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 #enter-btn:hover {
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* PDF Viewer */
@@ -85,6 +96,7 @@ body, html {
 iframe {
   width: 100%;
   height: 100%;
+  border: none;
 }
 
 /* Media Query for Mobile */
@@ -95,9 +107,9 @@ iframe {
   }
 
   #welcome .text-box {
-    padding: 15px;
-    margin: 15px;
-    border-radius: 15px;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 20px;
   }
 
   #welcome h1 {
@@ -110,7 +122,7 @@ iframe {
 
   #enter-btn {
     padding: 12px 24px;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   #pdf-viewer iframe {
