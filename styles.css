@@ -47,6 +47,26 @@ body, html {
 }
 
 /* PDF Viewer */
+
+
+
+#link-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allow clicks to pass through unless over a link */
+  z-index: 10;
+}
+
+#link-layer a {
+  pointer-events: auto; /* Make links clickable */
+  position: absolute;
+  text-decoration: none;
+}
+
+
 #pdf-viewer {
   display: none; /* Hidden by default */
   justify-content: center;
