@@ -16,15 +16,63 @@ body, html {
   width: 100%;
   height: 100%;
   background-image: url('assets/background.jpg');
-  background-size: cover;
+  background-size: cover;  /* Ensures the image covers the screen */
   background-position: center;
   text-align: center;
   color: white;
-  padding: 0; /* Remove padding to avoid space */
   position: relative; /* Ensure elements are positioned correctly */
 }
 
+/* Headings */
+#welcome h1 {
+  font-size: 4rem;
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+  color: white;
+}
+
+#welcome h2 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 0.1rem;
+  color: white;
+}
+
+/* Enter Button */
+#enter-btn {
+  margin-top: 40px;
+  padding: 15px 30px;
+  font-size: 1rem;
+  color: white;
+  background-color: rgba(250, 250, 250, 0.2);
+  border: 1px solid white;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#enter-btn:hover {
+  background-color: black;
+  color: white;
+}
+
 /* PDF Viewer */
+#link-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allow clicks to pass through unless over a link */
+  z-index: 10;
+}
+
+#link-layer a {
+  pointer-events: auto; /* Make links clickable */
+  position: absolute;
+  text-decoration: none;
+}
+
 #pdf-viewer {
   display: none; /* Hidden by default */
   justify-content: center;
@@ -44,84 +92,4 @@ body, html {
   object-fit: contain; /* Ensure canvas fits within container */
   border: 1px solid #fff;
   box-sizing: border-box;
-  touch-action: none; /* Disable default touch actions to prevent scroll or zoom */
-}
-
-/* Navigation buttons */
-.navigation {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  transform: translateY(-50%);
-  z-index: 100;
-}
-
-#prev-btn, #next-btn {
-  background: rgba(0, 0, 0, 0.6); /* Darker background color for better contrast */
-  border: none;
-  color: white;
-  font-size: 2rem; /* Larger font for better visibility */
-  padding: 10px; /* Smaller padding to avoid large buttons */
-  border-radius: 50%; /* Make the button circular */
-  cursor: pointer;
-  opacity: 0.7; /* Slight transparency */
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  outline: none; /* Remove outline when focused */
-  width: 45px; /* Button width */
-  height: 45px; /* Button height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#prev-btn:hover, #next-btn:hover {
-  background: rgba(0, 0, 0, 0.8); /* Darker shade on hover */
-  opacity: 1;
-  transform: scale(1.1); /* Slightly enlarge the button on hover */
-}
-
-/* FontAwesome Arrows */
-#prev-btn:before, #next-btn:before {
-  font-family: 'FontAwesome';
-  content: '\f104'; /* Left arrow for prev */
-}
-
-#next-btn:before {
-  content: '\f105'; /* Right arrow for next */
-}
-
-/* Media Query for Mobile */
-@media (max-width: 768px) {
-  /* Welcome screen adjustments */
-  #welcome {
-    padding: 0 20px; /* Add some padding for better text alignment on mobile */
-  }
-
-  /* PDF Viewer adjustments */
-  #pdf-viewer {
-    padding: 10px; /* Adjust padding for smaller screens */
-  }
-
-  #pdf-canvas {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Ensure the canvas stays responsive */
-  }
-
-  .navigation {
-    padding: 0 15px;
-  }
-
-  #prev-btn, #next-btn {
-    padding: 8px; /* Even smaller padding on mobile */
-    font-size: 1.6rem; /* Slightly smaller font size for navigation buttons */
-    width: 40px; /* Adjust button size for mobile */
-    height: 40px; /* Adjust button size for mobile */
-  }
-}
+  touch-action: none; /* Disable default tou
