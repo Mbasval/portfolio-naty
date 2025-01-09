@@ -25,11 +25,9 @@ body, html {
 
 /* Transparent box behind the text */
 #welcome .text-box {
-  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)); /* Soft gradient for depth */
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
   padding: 30px;
-  border-radius: 25px; /* More rounded corners for elegance */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+  border-radius: 15px; /* Rounded corners */
   max-width: 80%;
   margin: 20px;
   text-align: center;
@@ -40,34 +38,30 @@ body, html {
   font-size: 3.5rem;
   font-weight: 600;
   margin-bottom: 0.2rem;
-  color: white;
 }
 
 #welcome h2 {
   font-size: 1.8rem;
   font-weight: 400;
   margin-bottom: 0.2rem;
-  color: white;
 }
 
-/* Enter Button */
+/* Enter Button inside the text box */
 #enter-btn {
-  margin-top: 40px;
-  padding: 15px 30px;
-  font-size: 1.1rem;
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 1rem;
   color: white;
   background-color: rgba(250, 250, 250, 0.3);
   border: 1px solid white;
   border-radius: 50px; /* Fully rounded button */
   cursor: pointer;
   text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 #enter-btn:hover {
   background-color: white;
   color: #333;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* PDF Viewer */
@@ -97,7 +91,7 @@ iframe {
   #welcome .text-box {
     padding: 20px;
     margin: 10px;
-    border-radius: 20px;
+    border-radius: 10px;
   }
 
   #welcome h1 {
@@ -109,6 +103,11 @@ iframe {
   }
 
   #enter-btn {
-    padding: 12px 24px;
-    font-size: 1rem;
- 
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  #pdf-viewer iframe {
+    height: 80vh; /* Adjust to make PDF more visible on small screens */
+  }
+}
