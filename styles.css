@@ -21,6 +21,8 @@ body, html {
   text-align: center;
   color: white;
   position: relative;
+  padding: 0; /* Remove extra space around the welcome box */
+  margin: 0; /* Remove any margin that might cause extra space */
 }
 
 /* Transparent box behind the text */
@@ -34,7 +36,7 @@ body, html {
   justify-content: center; /* Ensures vertical centering */
   align-items: center; /* Ensures horizontal centering */
   text-align: center;
-  margin: 0; /* Remove any margin to center the box properly */
+  margin: 0; /* Remove margin to keep everything centered */
 }
 
 /* Headings */
@@ -42,6 +44,7 @@ body, html {
   font-size: 3.5rem;
   font-weight: 600;
   margin-bottom: 0.2rem;
+  margin-top: 0; /* Remove top margin to eliminate the extra space above */
 }
 
 #welcome h2 {
