@@ -98,6 +98,7 @@ body, html {
 }
 
 
+//////////////////////////////////////////////////
 
 /* Navigation buttons */
 .navigation {
@@ -111,27 +112,59 @@ body, html {
 }
 
 #prev-btn, #next-btn {
-  background: rgba(255, 255, 255, 0.4); /* Slightly transparent white */
+  background: rgba(0, 0, 0, 0.6); /* Darker background color for better contrast */
   border: none;
   color: white;
   font-size: 2rem;
-  padding: 20px; /* Larger padding to create circular shape */
-  border-radius: 50%; /* Ensure the button is circular */
+  padding: 15px; /* Adjust padding for a more rounded look */
+  border-radius: 50%; /* Ensures the button is circular */
   cursor: pointer;
-  opacity: 0;
+  opacity: 0.7; /* Slight transparency */
   transition: opacity 0.3s ease, transform 0.3s ease;
-  transform: scale(0.8);
+  transform: scale(1); /* Keep the buttons at a good size */
+  outline: none; /* Remove outline when focused */
 }
 
 #prev-btn:hover, #next-btn:hover {
-  background: rgba(255, 255, 255, 0.7); /* On hover, it becomes more opaque */
-  color: black;
-  transform: scale(1);
+  background: rgba(0, 0, 0, 0.8); /* Darker shade on hover */
+  opacity: 1;
+  transform: scale(1.1); /* Slightly enlarge the button on hover */
 }
 
-#pdf-viewer:hover .navigation button {
-  opacity: 1;
+/* Prevent buttons from being too intrusive */
+#prev-btn, #next-btn {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
 }
+
+#prev-btn:before, #next-btn:before {
+  font-family: 'FontAwesome';
+  content: '\f104'; /* Left arrow for prev */
+}
+
+#next-btn:before {
+  content: '\f105'; /* Right arrow for next */
+}
+
+/* For better alignment */
+.navigation {
+  padding: 0 20px;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transform: translateY(-50%);
+}
+
+
+
+////////////////////////////
 
 /* Media Query for Mobile */
 @media (max-width: 768px) {
