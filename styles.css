@@ -29,8 +29,11 @@ body, html {
   padding: 30px;
   border-radius: 15px; /* Rounded corners */
   max-width: 80%;
-  margin: 20px;
-  text-align: center;
+  margin: 0; /* Remove any margin to center the box properly */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Headings */
