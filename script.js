@@ -20,9 +20,9 @@ pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
 function renderPage(num) {
   pdfDoc.getPage(num).then(function (page) {
     const viewport = page.getViewport({ scale: scale });
-
-    // Ensure the canvas size fits within the viewport
-    const canvasWidth = canvas.clientWidth;
+    
+    // Resize the canvas based on the viewport size
+    const canvasWidth = canvas.clientWidth; // Use client width for responsive scaling
     const canvasHeight = canvasWidth * (viewport.height / viewport.width);
     
     canvas.width = canvasWidth;
