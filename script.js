@@ -7,10 +7,6 @@ const ctx = canvas.getContext('2d');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 
-// Swipe variables
-let touchStartX = 0;
-let touchEndX = 0;
-
 // PDF.js setup
 pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
   pdfDoc = pdf;
@@ -29,12 +25,16 @@ function renderPage(num) {
 
     const renderContext = {
       canvasContext: ctx,
-      viewport: viewport
+      viewport: viewport,
+      renderInteractiveForms: true // This will render any forms or interactive elements in the PDF
     };
-    page.render(renderContext);
     
-    // Update button visibility after rendering the page
-    updateNavButtonsVisibility();
+    page.render(renderContext).promise.then(function () {
+      // Update button visibility after rendering the page
+      updateNavButtonsVisibility();
+    }).catch(function (error) {
+      console.error('Error rendering page: ', error);
+    });
   });
 }
 
@@ -93,6 +93,9 @@ window.addEventListener('resize', function() {
 });
 
 // Swipe detection functions for mobile devices
+let touchStartX = 0;
+let touchEndX = 0;
+
 function handleTouchStart(event) {
   touchStartX = event.touches[0].clientX;
 }
