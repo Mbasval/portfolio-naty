@@ -30,15 +30,15 @@ body, html {
   background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
   padding: 30px;
   border-radius: 15px;
-  max-width: 80%;
+  width: 70%; /* Adjusted width for desktop */
+  max-width: 600px; /* Limit the max width */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   margin: 0;
-  width: 100%; /* Ensure it takes full width */
-  box-sizing: border-box; /* Avoid padding affecting width */
+  box-sizing: border-box;
 }
 
 /* Headings */
@@ -94,25 +94,24 @@ iframe {
 @media (max-width: 768px) {
   /* Welcome screen adjustments */
   #welcome {
-    padding: 0 10px; /* Add padding to ensure spacing is consistent on mobile */
+    padding: 0 20px; /* Ensure there's padding on mobile */
   }
 
   /* Transparent box adjustments */
   #welcome .text-box {
+    width: 90%; /* Adjust the width on mobile to be narrower */
     padding: 20px;
-    width: 100%; /* Ensure it takes full width on mobile */
-    max-width: 100%; /* Prevent any max-width limitations */
+    max-width: none; /* Remove the max-width for mobile */
+    margin: 0 auto; /* Ensure the box is centered */
   }
 
   /* Heading font size adjustments */
   #welcome h1 {
-    font-size: 2.5rem; /* Adjust font size for better mobile readability */
-    text-align: center; /* Ensure text is centered */
+    font-size: 2.5rem; /* Adjust font size for mobile */
   }
 
   #welcome h2 {
-    font-size: 1.5rem; /* Adjust font size */
-    text-align: center;
+    font-size: 1.5rem;
   }
 
   /* Enter button adjustments */
