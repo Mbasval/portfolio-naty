@@ -7,10 +7,17 @@ const ctx = canvas.getContext('2d');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 
+// Swipe variables
+let touchStartX = 0;
+let touchEndX = 0;
+
 // PDF.js setup
 pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
   pdfDoc = pdf;
   renderPage(currentPage);
+}).catch(function (error) {
+  console.error("Error loading PDF:", error);
+  alert("There was an issue loading the PDF.");
 });
 
 // Render page function
@@ -25,7 +32,29 @@ function renderPage(num) {
       viewport: viewport
     };
     page.render(renderContext);
+    
+    // Update button visibility
+    updateNavButtonsVisibility();
   });
+}
+
+// Update navigation buttons visibility based on page number
+function updateNavButtonsVisibility() {
+  if (currentPage <= 1) {
+    prevBtn.style.opacity = 0.5;
+    prevBtn.disabled = true;
+  } else {
+    prevBtn.style.opacity = 1;
+    prevBtn.disabled = false;
+  }
+
+  if (currentPage >= pdfDoc.numPages) {
+    nextBtn.style.opacity = 0.5;
+    nextBtn.disabled = true;
+  } else {
+    nextBtn.style.opacity = 1;
+    nextBtn.disabled = false;
+  }
 }
 
 // Navigation buttons functionality
@@ -46,3 +75,42 @@ document.getElementById('enter-btn').addEventListener('click', function () {
   document.getElementById('welcome').style.display = 'none';
   document.getElementById('pdf-viewer').style.display = 'flex';
 });
+
+// Handle window resize to adjust canvas size
+window.addEventListener('resize', function() {
+  if (pdfDoc) {
+    renderPage(currentPage); // Re-render current page to adjust to new canvas size
+  }
+});
+
+// Swipe detection functions
+function handleTouchStart(event) {
+  touchStartX = event.touches[0].clientX;
+}
+
+function handleTouchEnd(event) {
+  touchEndX = event.changedTouches[0].clientX;
+  handleSwipe();
+}
+
+function handleSwipe() {
+  if (touchEndX < touchStartX) {
+    // Swipe Left - Go to next page
+    if (currentPage < pdfDoc.numPages) {
+      currentPage++;
+      renderPage(currentPage);
+    }
+  }
+
+  if (touchEndX > touchStartX) {
+    // Swipe Right - Go to previous page
+    if (currentPage > 1) {
+      currentPage--;
+      renderPage(currentPage);
+    }
+  }
+}
+
+// Attach touch event listeners
+canvas.addEventListener('touchstart', handleTouchStart);
+canvas.addEventListener('touchend', handleTouchEnd);
