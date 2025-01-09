@@ -7,22 +7,20 @@ const ctx = canvas.getContext('2d');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 
-// Enter button functionality (transition to PDF viewer)
-document.getElementById('enter-btn').addEventListener('click', function () {
-  document.getElementById('welcome').style.display = 'none'; // Hide the welcome screen
-  document.getElementById('pdf-viewer').style.display = 'flex'; // Show the PDF viewer
-  
-  // Load the PDF
-  pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
-    pdfDoc = pdf;
-    renderPage(currentPage);
-  }).catch(function (error) {
-    console.error("Error loading PDF:", error);
-    alert("There was an issue loading the PDF.");
-  });
+// Swipe variables
+let touchStartX = 0;
+let touchEndX = 0;
+
+// PDF.js setup
+pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
+  pdfDoc = pdf;
+  renderPage(currentPage);
+}).catch(function (error) {
+  console.error("Error loading PDF:", error);
+  alert("There was an issue loading the PDF.");
 });
 
-// PDF.js setup: Render page function
+// Render page function
 function renderPage(num) {
   pdfDoc.getPage(num).then(function (page) {
     const viewport = page.getViewport({ scale: scale });
@@ -40,7 +38,7 @@ function renderPage(num) {
   });
 }
 
-// Function to update the navigation buttons visibility
+// Update navigation buttons visibility based on page number
 function updateNavButtonsVisibility() {
   if (currentPage <= 1) {
     prevBtn.style.opacity = 0.5;
@@ -59,7 +57,7 @@ function updateNavButtonsVisibility() {
   }
 }
 
-// Navigation buttons functionality (Previous and Next buttons)
+// Navigation buttons functionality
 prevBtn.addEventListener('click', function () {
   if (currentPage <= 1) return;
   currentPage--;
@@ -72,9 +70,56 @@ nextBtn.addEventListener('click', function () {
   renderPage(currentPage);
 });
 
+// Enter button functionality (transition to PDF viewer)
+document.getElementById('enter-btn').addEventListener('click', function () {
+  document.getElementById('welcome').style.display = 'none'; // Hide the welcome screen
+  document.getElementById('pdf-viewer').style.display = 'flex'; // Show the PDF viewer
+  
+  // Load the PDF
+  pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
+    pdfDoc = pdf;
+    renderPage(currentPage);
+  }).catch(function (error) {
+    console.error("Error loading PDF:", error);
+    alert("There was an issue loading the PDF.");
+  });
+});
+
 // Handle window resize to adjust canvas size
 window.addEventListener('resize', function() {
   if (pdfDoc) {
     renderPage(currentPage); // Re-render current page to adjust to new canvas size
   }
 });
+
+// Swipe detection functions for mobile devices
+function handleTouchStart(event) {
+  touchStartX = event.touches[0].clientX;
+}
+
+function handleTouchEnd(event) {
+  touchEndX = event.changedTouches[0].clientX;
+  handleSwipe();
+}
+
+function handleSwipe() {
+  if (touchEndX < touchStartX) {
+    // Swipe Left - Go to next page
+    if (currentPage < pdfDoc.numPages) {
+      currentPage++;
+      renderPage(currentPage);
+    }
+  }
+
+  if (touchEndX > touchStartX) {
+    // Swipe Right - Go to previous page
+    if (currentPage > 1) {
+      currentPage--;
+      renderPage(currentPage);
+    }
+  }
+}
+
+// Attach touch event listeners to canvas for swipe functionality
+canvas.addEventListener('touchstart', handleTouchStart);
+canvas.addEventListener('touchend', handleTouchEnd);
