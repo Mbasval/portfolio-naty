@@ -30,8 +30,8 @@ body, html {
 }
 
 #welcome h2 {
-  font-size: 3rem;
-  font-weight: 500;
+  font-size: 2rem;
+  font-weight: 400;
   margin-bottom: 0.5rem;
   color: white;
 }
