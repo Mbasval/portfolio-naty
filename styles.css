@@ -21,6 +21,7 @@ body, html {
   text-align: center;
   color: white;
   padding: 0; /* Remove padding to avoid space */
+  position: relative; /* Ensure elements are positioned correctly */
 }
 
 /* Headings */
@@ -131,12 +132,20 @@ body, html {
 /* Media Query for Mobile */
 @media (max-width: 768px) {
   /* Welcome screen adjustments */
+  #welcome {
+    padding: 0 20px; /* Add some padding for better text alignment on mobile */
+  }
+
   #welcome h1 {
     font-size: 2.5rem; /* Smaller font for h1 */
+    text-align: center; /* Ensure h1 is centered */
+    margin-left: 0; /* Remove any potential left margin */
   }
 
   #welcome h2 {
     font-size: 1.5rem; /* Smaller font for h2 */
+    text-align: center; /* Ensure h2 is centered */
+    margin-left: 0; /* Remove any potential left margin */
   }
 
   #enter-btn {
