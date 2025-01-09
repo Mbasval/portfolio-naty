@@ -8,17 +8,18 @@ const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 
 // PDF.js setup
-pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
+pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function(pdf) {
   pdfDoc = pdf;
+  console.log("PDF loaded successfully.");
   renderPage(currentPage);
-}).catch(function (error) {
+}).catch(function(error) {
   console.error("Error loading PDF:", error);
   alert("There was an issue loading the PDF.");
 });
 
 // Render page function
 function renderPage(num) {
-  pdfDoc.getPage(num).then(function (page) {
+  pdfDoc.getPage(num).then(function(page) {
     const viewport = page.getViewport({ scale: scale });
     
     // Resize the canvas based on the viewport size
