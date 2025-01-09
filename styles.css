@@ -16,14 +16,27 @@ body, html {
   width: 100%;
   height: 100%;
   background-image: url('assets/background.jpg');
-  background-size: cover;  /* Ensures the image covers the screen */
+  background-size: cover;
   background-position: center;
   text-align: center;
   color: white;
   position: relative; /* Ensure elements are positioned correctly */
 }
 
-/* Headings */
+/* Transparent box behind the text */
+#welcome .text-box {
+  background-color: rgba(0, 0, 0, 0.6); /* Transparent black */
+  padding: 20px;
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for aesthetics */
+  margin: 20px;
+  display: inline-block;
+  max-width: 90%;
+  text-align: center;
+  z-index: 1;
+}
+
+/* Headings inside the text box */
 #welcome h1 {
   font-size: 4rem;
   font-weight: 500;
@@ -70,26 +83,29 @@ body, html {
 }
 
 iframe {
-  border: none;
+  width: 100%;
+  height: 100%;
 }
 
 /* Media Query for Mobile */
 @media (max-width: 768px) {
   /* Welcome screen adjustments */
   #welcome {
-    padding: 0 20px; /* Add some padding for better text alignment on mobile */
+    padding: 0 20px;
+  }
+
+  #welcome .text-box {
+    padding: 15px;
+    margin: 15px;
+    border-radius: 15px;
   }
 
   #welcome h1 {
-    font-size: 2.5rem; /* Smaller font for h1 */
-    text-align: center; /* Ensure h1 is centered */
-    margin-left: 0; /* Remove any potential left margin */
+    font-size: 2.5rem;
   }
 
   #welcome h2 {
-    font-size: 1.5rem; /* Smaller font for h2 */
-    text-align: center; /* Ensure h2 is centered */
-    margin-left: 0; /* Remove any potential left margin */
+    font-size: 1.5rem;
   }
 
   #enter-btn {
@@ -97,12 +113,7 @@ iframe {
     font-size: 0.9rem;
   }
 
-  #welcome {
-    padding: 10px;
-  }
-
-  /* PDF Viewer adjustments */
-  #pdf-viewer {
-    padding: 10px; /* Adjust padding for smaller screens */
+  #pdf-viewer iframe {
+    height: 80vh; /* Adjust to make PDF more visible on small screens */
   }
 }
