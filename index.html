@@ -9,29 +9,23 @@
 <body>
 
   <!-- Welcome screen -->
-  
-
-
-
-<div id="welcome">
-  <h1>Welcome to Our PDF Viewer</h1>
-  <h2>Click below to enter</h2>
-  <button id="enter-btn">Entrar</button>
-</div>
-
-<div id="pdf-viewer">
-  <canvas id="pdf-canvas"></canvas>
-  <div class="navigation">
-    <button id="prev-btn" disabled>&lt;</button>
-    <button id="next-btn" disabled>&gt;</button>
+  <div id="welcome">
+    <div>
+      <h1>Soy Natalia Leal</h1>
+      <h2>Bienvenid@ a Mi Portfolio de Diseño</h2>
+      <button id="enter-btn">Entrar</button>
+    </div>
   </div>
-  <div id="link-layer"></div>
-</div>
 
-  
+  <!-- PDF Viewer (hidden initially) -->
+  <div id="pdf-viewer">
+    <canvas id="pdf-canvas"></canvas>
+    <div class="navigation">
+      <button id="prev-btn">&lt;</button>
+      <button id="next-btn">&gt;</button>
+    </div>
+  </div>
 
-
-  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
   <script src="script.js"></script>
 </body>
