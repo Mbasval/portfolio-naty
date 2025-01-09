@@ -4,7 +4,7 @@ body, html {
   padding: 0;
   height: 100%;
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  overflow: hidden; /* Prevent scrollbars */
+  overflow: hidden;
 }
 
 /* Welcome screen */
@@ -21,7 +21,6 @@ body, html {
   text-align: center;
   color: white;
   position: relative;
-  z-index: 0; /* Ensure elements are placed correctly */
 }
 
 /* Transparent box behind the text */
@@ -34,12 +33,6 @@ body, html {
   max-width: 80%;
   margin: 20px;
   text-align: center;
-  z-index: 1;
-  transition: transform 0.3s ease-in-out; /* Smooth hover transition */
-}
-
-#welcome .text-box:hover {
-  transform: translateY(-10px); /* Slight lift on hover */
 }
 
 /* Headings */
@@ -48,7 +41,6 @@ body, html {
   font-weight: 600;
   margin-bottom: 0.2rem;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Soft shadow for readability */
 }
 
 #welcome h2 {
@@ -56,7 +48,6 @@ body, html {
   font-weight: 400;
   margin-bottom: 0.2rem;
   color: white;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Subtle shadow for depth */
 }
 
 /* Enter Button */
@@ -69,7 +60,6 @@ body, html {
   border: 1px solid white;
   border-radius: 50px; /* Fully rounded button */
   cursor: pointer;
-  transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -89,8 +79,6 @@ body, html {
   height: 100%;
   background-color: black;
   position: relative;
-  text-align: center;
-  overflow: hidden; /* Prevent scrolling */
 }
 
 iframe {
@@ -123,9 +111,4 @@ iframe {
   #enter-btn {
     padding: 12px 24px;
     font-size: 1rem;
-  }
-
-  #pdf-viewer iframe {
-    height: 80vh; /* Adjust to make PDF more visible on small screens */
-  }
-}
+ 
