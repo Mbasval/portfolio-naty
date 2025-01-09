@@ -6,7 +6,8 @@ const canvas = document.getElementById('pdf-canvas');
 const ctx = canvas.getContext('2d');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
-const linkLayer = document.getElementById('link-layer'); // Invisible layer for links
+const textLayerDiv = document.getElementById('text-layer');
+const annotationLayerDiv = document.getElementById('annotation-layer');
 
 // PDF.js setup
 pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
@@ -18,23 +19,46 @@ pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
 function renderPage(num) {
   pdfDoc.getPage(num).then(function (page) {
     const viewport = page.getViewport({ scale: scale });
+
+    // Resize canvas to match PDF page dimensions
     canvas.width = viewport.width;
     canvas.height = viewport.height;
 
-    // Render the page into the canvas
+    // Render the PDF page onto the canvas
     const renderContext = {
       canvasContext: ctx,
-      viewport: viewport
+      viewport: viewport,
     };
     page.render(renderContext).promise.then(() => {
-      renderLinks(page, viewport); // Add links after rendering
+      // Render text and annotations after the page is rendered
+      renderTextLayer(page, viewport);
+      renderAnnotationLayer(page, viewport);
     });
   });
 }
 
-// Render links function
-function renderLinks(page, viewport) {
-  linkLayer.innerHTML = ''; // Clear existing links
+// Render the text layer for selectable text
+function renderTextLayer(page, viewport) {
+  textLayerDiv.innerHTML = ''; // Clear existing text layer
+  textLayerDiv.style.width = `${viewport.width}px`;
+  textLayerDiv.style.height = `${viewport.height}px`;
+
+  page.getTextContent().then(function (textContent) {
+    pdfjsLib.renderTextLayer({
+      textContent: textContent,
+      container: textLayerDiv,
+      viewport: viewport,
+      textDivs: [],
+    });
+  });
+}
+
+// Render the annotation layer for clickable links
+function renderAnnotationLayer(page, viewport) {
+  annotationLayerDiv.innerHTML = ''; // Clear existing annotation layer
+  annotationLayerDiv.style.width = `${viewport.width}px`;
+  annotationLayerDiv.style.height = `${viewport.height}px`;
+
   page.getAnnotations().then(function (annotations) {
     annotations.forEach(function (annotation) {
       if (annotation.subtype === 'Link' && annotation.url) {
@@ -50,10 +74,9 @@ function renderLinks(page, viewport) {
         link.style.top = `${viewportRect[1]}px`;
         link.style.width = `${viewportRect[2] - viewportRect[0]}px`;
         link.style.height = `${viewportRect[3] - viewportRect[1]}px`;
-        link.style.zIndex = 1000;
-        link.style.pointerEvents = 'auto'; // Enable pointer interaction
+        link.style.pointerEvents = 'auto';
         link.style.backgroundColor = 'rgba(0, 0, 255, 0.1)'; // Optional: Highlight for debugging
-        linkLayer.appendChild(link);
+        annotationLayerDiv.appendChild(link);
       }
     });
   });
