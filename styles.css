@@ -12,25 +12,18 @@ body, html {
 /* Welcome screen */
 #welcome {
 
-  position: relative;
-  width: 100vw;
-  height: 100vh; /* Full viewport height */
-  background-image: url('assets/background.jpg');
-  background-size: cover; /* Make the image cover the entire area */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Prevent repeating */
-  overflow: hidden; /* Hide any overflow */
-
-
-  
+   display: flex;
   justify-content: center;
   align-items: center;
-  
-  
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/background.jpg'); 
+  background-size: cover;
+  background-position: center;
   text-align: center;
   color: white;
   padding: 20px;
-
   
 
 }
