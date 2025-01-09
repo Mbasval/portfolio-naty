@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
   <!-- Welcome screen -->
   <div id="welcome">
     <div>
@@ -17,19 +16,22 @@
     </div>
   </div>
 
-  <!-- PDF Viewer -->
-  <div id="pdf-viewer">
-    <div class="pdf-container">
-      <canvas id="pdf-canvas"></canvas>
-      <div id="link-layer"></div>
-    </div>
-    <div class="navigation">
-      <button id="prev-btn">&lt;</button>
-      <button id="next-btn">&gt;</button>
-    </div>
+  <!-- PDF Viewer (hidden initially) -->
+  <div id="pdf-viewer" style="display: none;">
+    <iframe 
+      id="pdf-iframe" 
+      src="web/viewer.html?file=assets/portfolio.pdf" 
+      width="100%" 
+      height="100%" 
+      style="border: none;">
+    </iframe>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-  <script src="script.js"></script>
+  <script>
+    document.getElementById('enter-btn').addEventListener('click', function () {
+      document.getElementById('welcome').style.display = 'none';
+      document.getElementById('pdf-viewer').style.display = 'block';
+    });
+  </script>
 </body>
 </html>
