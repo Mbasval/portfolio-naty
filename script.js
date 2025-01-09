@@ -7,16 +7,22 @@ const ctx = canvas.getContext('2d');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 
-// PDF.js setup
-pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
-  pdfDoc = pdf;
-  renderPage(currentPage);
-}).catch(function (error) {
-  console.error("Error loading PDF:", error);
-  alert("There was an issue loading the PDF.");
+// Enter button functionality (transition to PDF viewer)
+document.getElementById('enter-btn').addEventListener('click', function () {
+  document.getElementById('welcome').style.display = 'none'; // Hide the welcome screen
+  document.getElementById('pdf-viewer').style.display = 'flex'; // Show the PDF viewer
+  
+  // Load the PDF
+  pdfjsLib.getDocument('assets/portfolio.pdf').promise.then(function (pdf) {
+    pdfDoc = pdf;
+    renderPage(currentPage);
+  }).catch(function (error) {
+    console.error("Error loading PDF:", error);
+    alert("There was an issue loading the PDF.");
+  });
 });
 
-// Render page function
+// PDF.js setup: Render page function
 function renderPage(num) {
   pdfDoc.getPage(num).then(function (page) {
     const viewport = page.getViewport({ scale: scale });
@@ -29,12 +35,12 @@ function renderPage(num) {
     };
     page.render(renderContext);
     
-    // Update button visibility
+    // Update button visibility after rendering the page
     updateNavButtonsVisibility();
   });
 }
 
-// Update navigation buttons visibility based on page number
+// Function to update the navigation buttons visibility
 function updateNavButtonsVisibility() {
   if (currentPage <= 1) {
     prevBtn.style.opacity = 0.5;
@@ -53,7 +59,7 @@ function updateNavButtonsVisibility() {
   }
 }
 
-// Navigation buttons functionality
+// Navigation buttons functionality (Previous and Next buttons)
 prevBtn.addEventListener('click', function () {
   if (currentPage <= 1) return;
   currentPage--;
@@ -64,12 +70,6 @@ nextBtn.addEventListener('click', function () {
   if (currentPage >= pdfDoc.numPages) return;
   currentPage++;
   renderPage(currentPage);
-});
-
-// Enter button functionality (transition to PDF viewer)
-document.getElementById('enter-btn').addEventListener('click', function () {
-  document.getElementById('welcome').style.display = 'none';
-  document.getElementById('pdf-viewer').style.display = 'flex';
 });
 
 // Handle window resize to adjust canvas size
