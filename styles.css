@@ -29,7 +29,7 @@ body, html {
   background: rgba(0, 0, 0, 0.6);
   padding: 40px 30px;
   border-radius: 20px;
-  width: 50%;
+  width: 50%; /* Default width for desktop */
   max-width: 600px;
   display: flex;
   flex-direction: column;
@@ -76,14 +76,14 @@ body, html {
 
 /* Flex container for buttons */
 #welcome .button-group {
-  display: flex;
-  flex-direction: row; /* Force buttons to align horizontally */
-  justify-content: center;
-  align-items: center;
+  display: flex; /* Make buttons align side by side */
+  flex-direction: row; /* Align horizontally */
+  justify-content: center; /* Center buttons */
+  align-items: center; /* Align vertically */
   gap: 20px; /* Add space between buttons */
+  margin-top: 20px;
   width: 100%;
   max-width: 400px;
-  margin-top: 20px; /* Add spacing from heading */
 }
 
 /* PDF Viewer */
