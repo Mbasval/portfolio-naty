@@ -4,11 +4,11 @@ body, html {
   padding: 0;
   height: 100%;
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  overflow: hidden;
+  background-color: #f4f4f4;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f4f4f4;
+  overflow: hidden;
 }
 
 /* Welcome screen */
@@ -29,10 +29,10 @@ body, html {
 /* Transparent box behind the text */
 #welcome .text-box {
   background: rgba(0, 0, 0, 0.6);
-  padding: 30px 20px;
+  padding: 40px 30px;
   border-radius: 20px;
-  width: 90%;
-  max-width: 400px;
+  width: 60%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,26 +42,26 @@ body, html {
 
 /* Headings */
 #welcome h1 {
-  font-size: 2.2rem;
+  font-size: 3rem;
   font-weight: 700;
-  margin: 0 0 10px;
+  margin: 0 0 20px;
   line-height: 1.2;
   color: #fff;
 }
 
 #welcome h2 {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 400;
-  margin: 0 0 20px;
+  margin: 0 0 30px;
   line-height: 1.4;
   color: #e0e0e0;
 }
 
 /* Buttons inside the text box */
 #welcome button {
-  margin: 10px 5px 0;
-  padding: 12px 20px;
-  font-size: 1rem;
+  margin: 10px 5px;
+  padding: 15px 30px;
+  font-size: 1.2rem;
   font-weight: 500;
   color: #fff;
   background-color: transparent;
@@ -80,9 +80,9 @@ body, html {
 #welcome .button-group {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   width: 100%;
-  max-width: 350px;
+  max-width: 500px;
 }
 
 /* PDF Viewer */
@@ -101,28 +101,26 @@ iframe {
 
 /* Media Query for Mobile */
 @media (max-width: 768px) {
-  #welcome {
-    padding: 0 10px;
-  }
-
   #welcome .text-box {
-    width: 95%;
+    width: 90%;
+    padding: 30px 20px;
   }
 
   #welcome h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   #welcome h2 {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   #welcome button {
-    font-size: 0.9rem;
-    padding: 10px 15px;
+    font-size: 1rem;
+    padding: 10px 20px;
   }
 
   #welcome .button-group {
-    flex-direction: row;
+    flex-direction: column;
+    gap: 10px;
   }
 }
