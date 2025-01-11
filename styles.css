@@ -29,7 +29,7 @@ body, html {
   background: rgba(0, 0, 0, 0.6);
   padding: 40px 30px;
   border-radius: 20px;
-  width: 50%; /* Default width for desktop */
+  width: 50%;
   max-width: 600px;
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@ body, html {
 
 /* Headings */
 #welcome h1 {
-  font-size: 3rem; /* Large text for desktop */
+  font-size: 3rem;
   font-weight: 700;
   margin: 0 0 20px;
   line-height: 1.2;
@@ -48,7 +48,7 @@ body, html {
 }
 
 #welcome h2 {
-  font-size: 1.5rem; /* Subtitle text */
+  font-size: 1.5rem;
   font-weight: 400;
   margin: 0 0 30px;
   line-height: 1.4;
@@ -74,13 +74,16 @@ body, html {
   color: #333;
 }
 
+/* Flex container for buttons */
 #welcome .button-group {
   display: flex;
-  justify-content: space-evenly; /* Ensures buttons are evenly spaced */
-  gap: 20px; /* Adds space between buttons */
+  flex-direction: row; /* Force buttons to align horizontally */
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Add space between buttons */
   width: 100%;
   max-width: 400px;
-  margin-top: 20px; /* Add spacing between buttons and the heading */
+  margin-top: 20px; /* Add spacing from heading */
 }
 
 /* PDF Viewer */
