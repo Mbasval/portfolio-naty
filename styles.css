@@ -43,7 +43,7 @@ body, html {
 #welcome h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  margin: 0;
+  margin-bottom: 5px; /* Close spacing between h1 and h2 */
   line-height: 1.2;
   color: #fff;
 }
@@ -51,8 +51,8 @@ body, html {
 #welcome h2 {
   font-size: 1.2rem;
   font-weight: 400;
-  margin: 0;
-  line-height: 1.4;
+  margin: 0; /* Remove extra margin below */
+  line-height: 1.2; /* Tighten line spacing */
   color: #e0e0e0;
 }
 
@@ -71,8 +71,9 @@ body, html {
 }
 
 #welcome button:hover {
-  background-color: white;
-  color: #333;
+  background-color: #EC006E; /* Pink background on hover */
+  color: white; /* White text on hover */
+  border-color: #EC006E; /* Border matches background */
 }
 
 /* Flex container for buttons */
@@ -119,8 +120,9 @@ body, html {
 }
 
 .contact-icons a:hover {
-  background-color: white;
-  color: #333;
+  background-color: #EC006E; /* Pink background on hover */
+  color: white; /* White text on hover */
+  border-color: #EC006E; /* Border matches background */
 }
 
 /* PDF Viewer */
@@ -132,23 +134,25 @@ body, html {
   position: relative;
 }
 
+/* Back to Home Button */
 #pdf-viewer #back-home-btn {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: white;
-  color: black;
+  background-color: #EC006E; /* Always pink */
+  color: white; /* Always white text */
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
   z-index: 1000;
+  transition: all 0.3s ease-in-out;
 }
 
 #pdf-viewer #back-home-btn:hover {
-  background-color: #333;
-  color: white;
+  background-color: white; /* White background on hover */
+  color: #EC006E; /* Pink text on hover */
 }
 
 /* Media Query for Mobile */
