@@ -57,7 +57,6 @@ body, html {
 
 /* Buttons inside the text box */
 #welcome button {
-  margin: 0;
   padding: 15px 30px;
   font-size: 1.2rem;
   font-weight: 500;
@@ -77,10 +76,11 @@ body, html {
 
 #welcome .button-group {
   display: flex;
-  justify-content: center;
-  gap: 20px; /* Space between buttons */
+  justify-content: space-evenly; /* Ensures buttons are evenly spaced */
+  gap: 20px; /* Adds space between buttons */
   width: 100%;
   max-width: 400px;
+  margin-top: 20px; /* Add spacing between buttons and the heading */
 }
 
 /* PDF Viewer */
