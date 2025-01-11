@@ -30,8 +30,8 @@ body, html {
   background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
   padding: 20px;
   border-radius: 15px;
-  width: 80%; /* Adjusted width for mobile */
-  max-width: 400px; /* Smaller max-width for mobile */
+  width: 80%;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,26 +40,26 @@ body, html {
   margin: 0;
   box-sizing: border-box;
   position: relative;
-  z-index: 10; /* Ensure it's above the background */
+  z-index: 10;
 }
 
 /* Headings */
 #welcome h1 {
-  font-size: 2.5rem; /* Smaller font size for mobile */
+  font-size: 2.5rem;
   font-weight: 600;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.5rem;
   margin-top: 0;
 }
 
 #welcome h2 {
-  font-size: 1.4rem; /* Smaller font size for mobile */
+  font-size: 1.4rem;
   font-weight: 400;
-  margin-bottom: 0.2rem;
+  margin-bottom: 1rem;
 }
 
-/* Enter Button inside the text box */
-#enter-btn {
-  margin-top: 20px;
+/* Buttons inside the text box */
+#welcome button {
+  margin-top: 10px;
   padding: 10px 20px;
   font-size: 1rem;
   color: white;
@@ -68,9 +68,15 @@ body, html {
   border-radius: 50px;
   cursor: pointer;
   text-transform: uppercase;
+  margin-right: 10px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-#enter-btn:hover {
+#welcome button:last-child {
+  margin-right: 0;
+}
+
+#welcome button:hover {
   background-color: white;
   color: #333;
 }
@@ -94,42 +100,29 @@ iframe {
 
 /* Media Query for Mobile */
 @media (max-width: 768px) {
-  /* Welcome screen adjustments */
   #welcome {
-    padding: 0 20px; /* Ensure there's padding on mobile */
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Ensure items are centered */
+    padding: 0 20px;
   }
 
-  /* Transparent box adjustments */
   #welcome .text-box {
-    width: 90%; /* Make box slightly larger on mobile */
-    padding: 20px;
-    max-width: 350px; /* Max width of the box */
-    margin: 0 auto; /* Ensure the box is centered */
+    width: 90%;
+    max-width: 350px;
   }
 
-  /* Heading font size adjustments */
   #welcome h1 {
-    font-size: 2.5rem; /* Adjust font size for mobile */
+    font-size: 2rem;
     margin: 0;
   }
 
   #welcome h2 {
-    font-size: 1.4rem; /* Adjust font size for mobile */
+    font-size: 1.2rem;
     margin: 0;
   }
 
-  /* Enter button adjustments */
-  #enter-btn {
-    padding: 10px 20px;
-    font-size: 1rem;
-    width: 100%;
-    margin-top: 15px;
-  }
-
-  /* PDF viewer adjustments */
-  #pdf-viewer iframe {
-    height: 80vh; /* Ensure the PDF takes up appropriate space on mobile */
+  #welcome button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    margin-top: 10px;
+    margin-right: 5px;
   }
 }
