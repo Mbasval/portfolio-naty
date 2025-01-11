@@ -5,9 +5,6 @@ body, html {
   height: 100%;
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   background-color: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
 }
 
@@ -22,6 +19,7 @@ body, html {
   background-image: url('assets/background.jpg');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   text-align: center;
   color: white;
 }
@@ -31,7 +29,7 @@ body, html {
   background: rgba(0, 0, 0, 0.6);
   padding: 40px 30px;
   border-radius: 20px;
-  width: 60%;
+  width: 50%; /* Default width for desktop */
   max-width: 600px;
   display: flex;
   flex-direction: column;
@@ -42,7 +40,7 @@ body, html {
 
 /* Headings */
 #welcome h1 {
-  font-size: 3rem;
+  font-size: 3rem; /* Large text for desktop */
   font-weight: 700;
   margin: 0 0 20px;
   line-height: 1.2;
@@ -50,7 +48,7 @@ body, html {
 }
 
 #welcome h2 {
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* Subtitle text */
   font-weight: 400;
   margin: 0 0 30px;
   line-height: 1.4;
